@@ -2,7 +2,16 @@
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJhbHVtbm8xIiwiaWF0IjoxNzc1Nzc2MDMwLCJleHAiOjE3NzU4MTIwMzB9.484ldhMofDBxYfYKK29mfCUusS1HUbbC_mX7fqQesWs
 Authorization: Bearer {{token}}
 
-### consultar una pelicula por id
+### login de usuario 
+POST http://localhost:3000/auth/login
+Content-Type:   application/json
+
+{
+    "username": "alumno1",
+    "password": "hash_falso_456"
+}
+
+### consultar una pelicula por id o general
 GET http://localhost:3000/movies/
 Authorization:  Bearer {{token}}
 Content-Type:   application/json
@@ -21,9 +30,6 @@ Content-Type:   application/json
     "poster_url": "https://m.media-amazon.com/images/I/51EG732BV3L.jpg"
 }
 
-### eliminar
-DELETE http://localhost:3000/movies/1234
-
 ### actualizar
 PUT http://localhost:3000/movies/6
 Authorization: Bearer {{token}}
@@ -35,14 +41,9 @@ Content-Type:   application/json
 }
 
 ### eliminar un recurso
-DELETE http://localhost:3000/movies/1234
-
-
-### login de usuario 
-POST http://localhost:3000/auth/login
+DELETE http://localhost:3000/movies/6
+Authorization: Bearer {{token}}
 Content-Type:   application/json
 
-{
-    "username": "alumno1",
-    "password": "hash_falso_456"
-}
+
+
