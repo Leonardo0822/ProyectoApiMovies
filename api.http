@@ -25,12 +25,13 @@ Content-Type:   application/json
 DELETE http://localhost:3000/movies/1234
 
 ### actualizar
-PUT http://localhost:3000/movies/1234
+PUT http://localhost:3000/movies/6
+Authorization: Bearer {{token}}
 Content-Type:   application/json
 
 {
-    "title": "The Matrix Reloaded",
-    "director": [4,6]
+    "title": "Las locas rubias",
+    "director": [1]
 }
 
 ### eliminar un recurso

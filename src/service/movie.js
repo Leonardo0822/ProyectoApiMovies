@@ -113,20 +113,73 @@ export default class Movie {
     }
 }
 
-    static update = async (id, movie) => { //movie = {}
+   static update = async (id, movie) => {
 
-        const idx = MOVIES.findIndex((movie) => movie.id === id)
+    const updateMovie = { ...movie }
 
-        const movieUpdated = {
-            ...MOVIES[idx],
-            ...movie
-        }
+    await pool.query(
+        `UPDATE movies
+         SET title = ?, release_year = ?, synopsis = ?, poster_url = ?
+         WHERE id = ?`,
+        [
+            updateMovie.title,
+            updateMovie.release_year,
+            updateMovie.synopsis,
+            updateMovie.poster_url ?? null,
+            id
+        ]
+    )
 
-        MOVIES[idx] = movieUpdated
+    if (updateMovie.genre) {
+        await pool.query(
+            `DELETE FROM movie_genres WHERE movie_id = ?`,
+            [id]
+        )
 
-        return movieUpdated
+        const genreValues = updateMovie.genre.map((genreId) => [id, genreId])
 
+        await pool.query(
+            `INSERT INTO movie_genres (movie_id, genre_id) VALUES ?`,
+            [genreValues]
+        )
     }
+
+    if (updateMovie.director) {
+        await pool.query(
+            `DELETE FROM movie_directors WHERE movie_id = ?`,
+            [id]
+        )
+
+        const directorValues = updateMovie.director.map((directorId) => [id, directorId])
+
+        await pool.query(
+            `INSERT INTO movie_directors (movie_id, director_id) VALUES ?`,
+            [directorValues]
+        )
+    }
+
+    const [rows] = await pool.query(
+        `SELECT 
+            m.id,
+            m.title,
+            m.release_year,
+            m.synopsis,
+            m.poster_url,
+            GROUP_CONCAT(DISTINCT g.name SEPARATOR ', ') AS genres,
+            GROUP_CONCAT(DISTINCT d.full_name SEPARATOR ', ') AS directors
+        FROM movies m
+        LEFT JOIN movie_genres mg ON m.id = mg.movie_id
+        LEFT JOIN genres g ON mg.genre_id = g.id
+        LEFT JOIN movie_directors md ON m.id = md.movie_id
+        LEFT JOIN directors d ON md.director_id = d.id
+        WHERE m.id = ?
+        GROUP BY m.id`,
+        [id]
+    )
+
+    return rows[0]
+}
+
 
     static delete = async (id) => {
 
