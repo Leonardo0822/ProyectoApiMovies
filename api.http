@@ -41,7 +41,7 @@ Content-Type:   application/json
 }
 
 ### eliminar un recurso
-DELETE http://localhost:3000/movies/6
+DELETE http://localhost:3000/movies/5
 Authorization: Bearer {{token}}
 Content-Type:   application/json
 
