@@ -46,4 +46,10 @@ Authorization: Bearer {{token}}
 Content-Type:   application/json
 
 
+### consultar todos los generos
+GET http://localhost:3000/genres/
+Authorization: Bearer {{token}}
+Content-Type:   application/json
+
+
 
