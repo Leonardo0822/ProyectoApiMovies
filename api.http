@@ -13,12 +13,12 @@ Authorization:  Bearer {{token}}
 Content-Type:   application/json
 
 {
-    "title": "The Matrix Reloaded",
-    "releaseYear": 2003,
-    "synopsis": "Neo y los rebeldes continúan la lucha contra las máquinas.",
+    "title": "Donde están las rubias",
+    "release_year": 2003,
+    "synopsis": "Pelicula de comedia.",
     "genre": [1, 2],
     "director": [2, 4],
-    "posterUrl": "https://m.media-amazon.com/images/I/51EG732BV3L.jpg"
+    "poster_url": "https://m.media-amazon.com/images/I/51EG732BV3L.jpg"
 }
 
 ### eliminar

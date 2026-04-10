@@ -85,8 +85,8 @@ export default class Movie {
 
     try {
         const [result] = await pool.query(
-            `INSERT INTO movies (title, release_year, synopsis) VALUES (?, ?, ?)`,
-            [newMovie.title, newMovie.release_year, newMovie.synopsis]
+            `INSERT INTO movies (title, release_year, synopsis, poster_url) VALUES (?, ?, ?, ?)`,
+            [newMovie.title, newMovie.release_year, newMovie.synopsis, newMovie.poster_url ?? null]
         )
 
         const movieId = result.insertId
