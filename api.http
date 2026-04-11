@@ -51,5 +51,33 @@ GET http://localhost:3000/genres/
 Authorization: Bearer {{token}}
 Content-Type:   application/json
 
+### consultar un genero por id o general
+GET http://localhost:3000/genres/1
+Authorization: Bearer {{token}}
+Content-Type:   application/json
+
+### crear un genero
+POST http://localhost:3000/genres
+Authorization: Bearer {{token}}
+Content-Type:   application/json
+
+{
+    "name": "Comedia"
+}
+
+### actualizar un genero
+PUT http://localhost:3000/genres/5
+Authorization: Bearer {{token}}
+Content-Type:   application/json
+
+{
+    "name": "Comedia Romantica"
+}
+
+### eliminar un genero
+DELETE http://localhost:3000/genres/5
+Authorization: Bearer {{token}}
+Content-Type:   application/json
+
 
 
