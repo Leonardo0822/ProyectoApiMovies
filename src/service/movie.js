@@ -107,20 +107,30 @@ static getAll = async ({ genre, director, year } = {}) => {
 
     const updateMovie = { ...movie }
 
-    await pool.query(
-        `UPDATE movies
-         SET title = ?, release_year = ?, synopsis = ?, poster_url = ?
-         WHERE id = ?`,
-        [
-            updateMovie.title,
-            updateMovie.release_year,
-            updateMovie.synopsis,
-            updateMovie.poster_url ?? null,
-            id
-        ]
-    )
+    const fieldsToUpdate = []
+    const values = []
 
-    if (updateMovie.genre) {
+    if (updateMovie.title!== undefined) {
+        fieldsToUpdate.push('title = ?')
+        values.push(updateMovie.title)
+    }
+
+    if (updateMovie.release_year!== undefined) {
+        fieldsToUpdate.push('release_year = ?')
+        values.push(updateMovie.release_year)
+    }
+
+    if (updateMovie.synopsis!== undefined) {
+        fieldsToUpdate.push('synopsis = ?')
+        values.push(updateMovie.synopsis)
+    }
+
+    if (updateMovie.poster_url!== undefined) {
+        fieldsToUpdate.push('poster_url = ?')
+        values.push(updateMovie.poster_url)
+    }
+
+      if (updateMovie.genre) {
         await pool.query(
             `DELETE FROM movie_genres WHERE movie_id = ?`,
             [id]
@@ -147,29 +157,7 @@ static getAll = async ({ genre, director, year } = {}) => {
             [directorValues]
         )
     }
-
-    const [rows] = await pool.query(
-        `SELECT 
-            m.id,
-            m.title,
-            m.release_year,
-            m.synopsis,
-            m.poster_url,
-            GROUP_CONCAT(DISTINCT g.name SEPARATOR ', ') AS genres,
-            GROUP_CONCAT(DISTINCT d.full_name SEPARATOR ', ') AS directors
-        FROM movies m
-        LEFT JOIN movie_genres mg ON m.id = mg.movie_id
-        LEFT JOIN genres g ON mg.genre_id = g.id
-        LEFT JOIN movie_directors md ON m.id = md.movie_id
-        LEFT JOIN directors d ON md.director_id = d.id
-        WHERE m.id = ?
-        GROUP BY m.id`,
-        [id]
-    )
-
-    return rows[0]
 }
-
 
     static delete = async (id) => {
         await pool.query(

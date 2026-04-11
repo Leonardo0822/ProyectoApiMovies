@@ -11,7 +11,7 @@ Content-Type:   application/json
 }
 
 ### consultar una pelicula por id o general
-GET http://localhost:3000/movies?year=2003
+GET http://localhost:3000/movies/7
 Authorization:  Bearer {{token}}
 Content-Type:   application/json
 
@@ -30,13 +30,13 @@ Content-Type:   application/json
 }
 
 ### actualizar
-PUT http://localhost:3000/movies/6
+PUT http://localhost:3000/movies/7
 Authorization: Bearer {{token}}
 Content-Type:   application/json
 
 {
     "title": "Las locas rubias",
-    "director": [1]
+    "director": [2,4,1]
 }
 
 ### eliminar un recurso
@@ -102,12 +102,13 @@ Content-Type:   application/json
 PUT http://localhost:3000/directors/5
 Authorization: Bearer {{token}}
 Content-Type:   application/json
+
 {
     "name": "Leonardo Amaya "
 }
 
 ### eliminar un director
-DELETE http://localhost:3000/directors/6
+DELETE http://localhost:3000/directors/5
 Authorization: Bearer {{token}}
 Content-Type:   application/json
 
