@@ -1,6 +1,5 @@
 ### consultar todas las peliculas
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJhbHVtbm8xIiwiaWF0IjoxNzc1Nzc2MDMwLCJleHAiOjE3NzU4MTIwMzB9.484ldhMofDBxYfYKK29mfCUusS1HUbbC_mX7fqQesWs
-Authorization: Bearer {{token}}
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJhbHVtbm8xIiwiaWF0IjoxNzc1ODczMjY3LCJleHAiOjE3NzU5MDkyNjd9.Lr0f4hCfFktav2DtJyOJC-GI8RuzpnA85ZCPtmEOw-Y
 
 ### login de usuario 
 POST http://localhost:3000/auth/login
@@ -12,7 +11,7 @@ Content-Type:   application/json
 }
 
 ### consultar una pelicula por id o general
-GET http://localhost:3000/movies/
+GET http://localhost:3000/movies?year=2003
 Authorization:  Bearer {{token}}
 Content-Type:   application/json
 
@@ -66,7 +65,7 @@ Content-Type:   application/json
 }
 
 ### actualizar un genero
-PUT http://localhost:3000/genres/5
+PUT http://localhost:3000/genres/6
 Authorization: Bearer {{token}}
 Content-Type:   application/json
 
@@ -75,7 +74,7 @@ Content-Type:   application/json
 }
 
 ### eliminar un genero
-DELETE http://localhost:3000/genres/5
+DELETE http://localhost:3000/genres/6
 Authorization: Bearer {{token}}
 Content-Type:   application/json
 
