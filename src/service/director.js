@@ -14,7 +14,7 @@ export default class director {
 
     static createDirector = async (name) => {
             const [result] = await pool.query(
-                `INSERT INTO directors (name) VALUES (?)`,
+                `INSERT INTO directors (full_name) VALUES (?)`,
                 [name]
             )
             return result.insertId
@@ -22,7 +22,7 @@ export default class director {
 
     static updateDirector = async (id, name) => {
             await pool.query(
-                `UPDATE directors SET name = ? WHERE id = ?`,
+                `UPDATE directors SET full_name = ? WHERE id = ?`,
                 [name, id]
             )
     }

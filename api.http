@@ -79,4 +79,36 @@ Authorization: Bearer {{token}}
 Content-Type:   application/json
 
 
+### consultar todos los directores
+GET http://localhost:3000/directors
+Authorization: Bearer {{token}}
+Content-Type:   application/json
+
+### consultar un director por id o general
+GET http://localhost:3000/directors/1
+Authorization: Bearer {{token}} 
+Content-Type:   application/json
+
+### crear un director
+POST http://localhost:3000/directors
+Authorization: Bearer {{token}}
+Content-Type:   application/json
+
+{
+    "name": "Steven Spielberg"
+}
+
+### actualizar un director
+PUT http://localhost:3000/directors/5
+Authorization: Bearer {{token}}
+Content-Type:   application/json
+{
+    "name": "Leonardo Amaya "
+}
+
+### eliminar un director
+DELETE http://localhost:3000/directors/6
+Authorization: Bearer {{token}}
+Content-Type:   application/json
+
 

@@ -6,6 +6,7 @@ import dotenv from 'dotenv'
 import { loadEnvFile } from 'node:process'
 import authsRoutes from './src/routes/auth.routes.js'
 import genresRouter from './src/routes/genre.routes.js'
+import directorRouter from './src/routes/director.routes.js'
 //import { hasPermission } from './src/middlewares/hasPermission.js'
 
 // dotenv.config() // carga las variables de entorno (.env)
@@ -26,6 +27,7 @@ app.use(express.json())
 //aqui, se define el punto de entrada (endpoint) "/movies"
 app.use('/movies', isAuth, moviesRouter)
 app.use('/genres', isAuth, genresRouter)
+app.use('/directors', isAuth, directorRouter)
 app.use('/auth', authsRoutes)
 
 app.listen(PORT, () => {
